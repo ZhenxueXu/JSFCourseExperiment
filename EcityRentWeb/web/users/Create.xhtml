@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template1.xhtml">
+        <div style=" position: absolute; left: 200px;">
+        <ui:define name="title">
+            注册
+        </ui:define>
+        <ui:define name="body">
+            <span style="font-family: 'ambleregular'; font-size: 50px;color: #CD1F25"><strong>免费注册</strong></span><br/><br/>
+            <h:form>
+                <p style="font-size: 15px;font-weight: 600">手机号</p>
+                <h:panelGrid columns="2">
+                    <p:inputText id="telephone" value="#{usersController.selected.telephone}" title="#{user.CreateUsersTitle_telephone}" required="true" requiredMessage="  请输入手机号"/>
+                    <h:messages for="telephone" errorStyle="color: red" infoStyle="color: green" layout="table"/></h:panelGrid><br/>
+                    <p style="font-size: 15px;font-weight: 600">用户名</p>
+                    <h:panelGrid columns="2">
+                    <p:inputText id="username" value="#{usersController.selected.username}" title="#{user.CreateUsersTitle_username}" required="true" requiredMessage="  请输入用户名"/>
+                    <h:messages for="username" errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGrid><br/>
+                    <p style="font-size: 15px;font-weight: 600">密码</p>
+                    <h:panelGrid columns="2">
+                    <p:password id="password" value="#{usersController.selected.password}" title="#{user.CreateUsersTitle_password}" required="true" requiredMessage="  请输入密码"/>
+                    <h:messages for="password" errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGrid><br/>
+                    <p style="font-size: 15px;font-weight: 600">验证码</p>
+                    <p:inputText id="check"/>
+                <br /><br/>
+                <p:commandButton action="#{usersController.create}" value="注册" ajax="false" />
+                <p:watermark value="请输入手机号" for="telephone"/>
+                <p:watermark value="请输入用户名" for="username"/>
+                <p:watermark value="请输入密码" for="password"/>
+                <p:watermark value="请输入验证码" for="check"/>
+                <br />
+                <br />
+               
+               
+            </h:form>
+        </ui:define>
+            </div>
+    </ui:composition>
+
+</html>

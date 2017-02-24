@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <link href="../css/style.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="../css/slider.css" rel="stylesheet" type="text/css" media="all"/>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html {width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+		#allmap{width:100%;height:500px;}
+		p{margin-left:5px; font-size:14px;}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&amp;ak=YjQ7FjgCefmG6p5f7WthsRqc"></script>
+    </head>
+    <body>
+         <div id="allmap"></div>
+        <script type="text/javascript">
+	// 百度地图API功能
+	var sContent =     
+	" <div class='section group'><div class='grid_1_of_4 images_1_of_4'>"+
+					"<a href='preview.html'><img src='../images/new-pic2.jpg' alt='' /></a>"+
+					" <h2>Lorem Ipsum is simply </h2>"+
+					 "<div class='price-details'>"+
+				       "<div class='price-number'>"+
+							"<p><span class='rupees'>$599.99</span></p>"+
+					    "</div><div class='add-cart'>"+								
+					"<h4><a href='preview.html'>Add to Cart</a></h4></div<div class='clear'></div>"+
+					"</div></div></div>";
+	var map = new BMap.Map("allmap");
+	var point = new BMap.Point(116.404, 39.915);
+	var marker = new BMap.Marker(point);
+	var infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
+	map.centerAndZoom(point, 15);
+	map.addOverlay(marker);
+   var navigationControl = new BMap.NavigationControl({
+    // 靠左上角位置
+    anchor: BMAP_ANCHOR_TOP_LEFT,
+    // LARGE类型
+    type: BMAP_NAVIGATION_CONTROL_LARGE,
+    // 启用显示定位
+    enableGeolocation: true
+  });
+  map.addControl(navigationControl);
+  // 添加定位控件
+  var geolocationControl = new BMap.GeolocationControl();
+  geolocationControl.addEventListener("locationSuccess", function(e){
+    // 定位成功事件
+    var address = '';
+    address += e.addressComponent.province;
+    address += e.addressComponent.city;
+    address += e.addressComponent.district;
+    address += e.addressComponent.street;
+    address += e.addressComponent.streetNumber;
+    alert("当前定位地址为：" + address);
+  });
+  geolocationControl.addEventListener("locationError",function(e){
+    // 定位失败事件
+    alert(e.message);
+  });
+  map.addControl(geolocationControl);
+	marker.addEventListener("click", function(){          
+	   this.openInfoWindow(infoWindow);
+	   //图片加载完毕重绘infowindow
+	   document.getElementById('imgDemo').onload = function (){
+		   infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+	   }
+	});
+</script>
+    </body>
+</html>

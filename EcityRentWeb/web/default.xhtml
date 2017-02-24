@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>ECITY出租平台</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+            <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+            <link href="css/slider.css" rel="stylesheet" type="text/css" media="all"/>
+            <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script> 
+    </h:head>
+    <h:body>
+       <div class="wrap">
+	<div class="header">
+		<div class="headertop_desc">
+			<div class="call">
+				 <p> <span class="number">ECITY出租平台</span></p>
+			</div>
+			<div class="account_desc">
+				<ul>
+					<li><a href="#">注册</a></li>
+					<li><a href="#">登录</a></li>
+					<li><a href="#">爱物出租</a></li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+        </div>
+           <br/> <br/><br/> <br/>
+           <div>
+               <table style="width: 100%; border: 1px">
+                   <tr >
+                       <td align="center" colspan="2"><span style="font-family: 'ambleregular'; font-size: 50px;color: #CD1F25"><strong>会员登录</strong></span><br/></td>
+                   </tr>
+                   <tr style="vertical-align: middle">
+                       <td style="width: 50%">
+                          <div  style="width: 100%; border-right:2px #888888 solid;">
+                   <img src="images/login.png"/>
+               </div> 
+                       </td>
+                       <td style="width: 50%;padding-left: 20px; vertical-align: middle" >
+                           <div>
+                               <h:form id="login">
+                               <p style="font-size: 20px;font-weight: 600">手机号</p>
+                               <p:inputText id="telephone" value="#{controllerBean.telephone}" immediate="true" required="true" requiredMessage="请输入手机号"/>
+                               &nbsp; &nbsp;<h:message for="telephone" errorStyle="color:red"/><p:watermark value="请输入已注册的手机号" for="telephone"/><br/><br/>
+                         <p style=" font-size: 20px;font-weight: 600" >密码</p>
+                         <p:password id="password" value="#{controllerBean.password}" required="true" requiredMessage="请输入密码" immediate="true"/>
+                          &nbsp; &nbsp;<h:message for="password" errorStyle="color:red"/><br/><br/>
+                         <p:commandButton value="登录" action="#{controllerBean.login()}" ajax="false" />                         
+                           </h:form>                       
+                               </div>    
+                       </td>
+                   </tr>
+               </table>
+               
+               
+           </div>
+           
+       </div>
+    </h:body>
+</html>
+

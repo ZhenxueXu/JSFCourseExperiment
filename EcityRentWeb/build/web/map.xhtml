@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html {width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+		#allmap{width:100%;height:500px;}
+		p{margin-left:5px; font-size:14px;}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&amp;ak=x6XWOhBD0ihh4zt0KftRcFl4WVjLwk4S"></script>
+    </h:head>
+    <h:body>
+        <div id="allmap"></div>
+        <script type="text/javascript">
+	// 百度地图API功能
+	var sContent =
+	"&lt;h4 style=&#x27;margin:0 0 5px 0;padding:0.2em 0&#x27;&gt;天安门&lt;/h4&gt;" + 
+	"&lt;img style=&#x27;float:right;margin:4px&#x27; id=&#x27;imgDemo&#x27; src=&#x27;http://app.baidu.com/map/images/tiananmen.jpg&#x27; width=&#x27;139&#x27; height=&#x27;104&#x27; title=&#x27;天安门&#x27;/&gt;" + 
+	"&lt;p style=&#x27;margin:0;line-height:1.5;font-size:13px;text-indent:2em&#x27;&gt;天安门坐落在中国北京市中心,故宫的南侧,与天安门广场隔长安街相望,是清朝皇城的大门...&lt;/p&gt;" + 
+	"&lt;/div&gt;";
+	var map = new BMap.Map("allmap");
+	var point = new BMap.Point(116.404, 39.915);
+	var marker = new BMap.Marker(point);
+	var infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
+	map.centerAndZoom(point, 15);
+	map.addOverlay(marker);
+   var navigationControl = new BMap.NavigationControl({
+    // 靠左上角位置
+    anchor: BMAP_ANCHOR_TOP_LEFT,
+    // LARGE类型
+    type: BMAP_NAVIGATION_CONTROL_LARGE,
+    // 启用显示定位
+    enableGeolocation: true
+  });
+  map.addControl(navigationControl);
+  // 添加定位控件
+  var geolocationControl = new BMap.GeolocationControl();
+  geolocationControl.addEventListener("locationSuccess", function(e){
+    // 定位成功事件
+    var address = '';
+    address += e.addressComponent.province;
+    address += e.addressComponent.city;
+    address += e.addressComponent.district;
+    address += e.addressComponent.street;
+    address += e.addressComponent.streetNumber;
+    alert("当前定位地址为：" + address);
+  });
+  geolocationControl.addEventListener("locationError",function(e){
+    // 定位失败事件
+    alert(e.message);
+  });
+  map.addControl(geolocationControl);
+	marker.addEventListener("click", function(){          
+	   this.openInfoWindow(infoWindow);
+	   //图片加载完毕重绘infowindow
+	   document.getElementById('imgDemo').onload = function (){
+		   infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+	   }
+	});
+</script>
+    </h:body>
+</html>
+

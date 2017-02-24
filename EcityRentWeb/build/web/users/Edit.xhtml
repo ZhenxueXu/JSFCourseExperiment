@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{user.EditUsersTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{user.EditUsersLabel_telephone}" for="telephone" />
+                    <h:inputText id="telephone" value="#{usersController.selected.telephone}" title="#{user.EditUsersTitle_telephone}" required="true" requiredMessage="#{user.EditUsersRequiredMessage_telephone}"/>
+                    <h:outputLabel value="#{user.EditUsersLabel_username}" for="username" />
+                    <h:inputText id="username" value="#{usersController.selected.username}" title="#{user.EditUsersTitle_username}" required="true" requiredMessage="#{user.EditUsersRequiredMessage_username}"/>
+                    <h:outputLabel value="#{user.EditUsersLabel_password}" for="password" />
+                    <h:inputText id="password" value="#{usersController.selected.password}" title="#{user.EditUsersTitle_password}" required="true" requiredMessage="#{user.EditUsersRequiredMessage_password}"/>
+                    <h:outputLabel value="#{user.EditUsersLabel_realName}" for="realName" />
+                    <h:inputText id="realName" value="#{usersController.selected.realName}" title="#{user.EditUsersTitle_realName}" />
+                    <h:outputLabel value="#{user.EditUsersLabel_IDcard}" for="IDcard" />
+                    <h:inputText id="IDcard" value="#{usersController.selected.IDcard}" title="#{user.EditUsersTitle_IDcard}" />
+                    <h:outputLabel value="#{user.EditUsersLabel_sex}" for="sex" />
+                    <h:inputText id="sex" value="#{usersController.selected.sex}" title="#{user.EditUsersTitle_sex}" />
+                    <h:outputLabel value="#{user.EditUsersLabel_address}" for="address" />
+                    <h:inputText id="address" value="#{usersController.selected.address}" title="#{user.EditUsersTitle_address}" />
+                    <h:outputLabel value="#{user.EditUsersLabel_checkStatus}" for="checkStatus" />
+                    <h:inputText id="checkStatus" value="#{usersController.selected.checkStatus}" title="#{user.EditUsersTitle_checkStatus}" />
+                </h:panelGrid>
+                <h:commandLink action="#{usersController.update}" value="#{user.EditUsersSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{user.EditUsersViewLink}"/>
+                <br />
+                <h:commandLink action="#{usersController.prepareList}" value="#{user.EditUsersShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{user.EditUsersIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
